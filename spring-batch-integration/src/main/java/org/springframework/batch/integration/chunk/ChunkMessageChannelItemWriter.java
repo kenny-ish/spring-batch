@@ -168,6 +168,9 @@ public class ChunkMessageChannelItemWriter<T>
 						+ localState.getExpecting());
 			}
 
+			// The driving step increments the write count when the chunk is sent, while
+			// the worker contribution contains the actual number of items written.
+			stepExecution.setWriteCount(0);
 			for (StepContribution contribution : getStepContributions()) {
 				stepExecution.apply(contribution);
 			}
